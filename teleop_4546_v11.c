@@ -12,13 +12,36 @@
 
 /* Change log
 16 9 2013 Jonathan - Program created
+17 9 2012 Jonathan - *Added seperate tasks for left and right drive control
+										 *Added basic drive controls - left stick = left motor & right stick = right motor
+										 *Note - controllers have inverted y values
 */
-task drive() {
+task driveL() {
+	while(true) {
+		if(joy1_y1 < -25) {
+			motor[left] = 100;
+		}
+		if(joy1_y1 > 25) {
+			motor[left] = -100;
+		}
+	}
+}
 
+task driveR() {
+	while(true) {
+		if(joy1_y2 < -25) {
+			motor[right] = 100;
+		}
+		if(joy1_y2 > 25) {
+			motor[right] = -100;
+		}
+	}
 }
 
 task main() {
 	waitForStart();
-	StartTask (drive);
+	StartTask (driveL);
+	wait1Msec(5);
+	StartTask (driveR);
 	wait1Msec(5);
 }
