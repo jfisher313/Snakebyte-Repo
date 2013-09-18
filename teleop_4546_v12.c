@@ -33,7 +33,7 @@ task driveL() {
 
 		//Left tread backward
 		else if(y1 < -25) {
-			motor[left] = -y1;
+			motor[left] = y1;
 		}
 
 		//Motor unused
@@ -62,7 +62,7 @@ task driveR() {
 
 		//Right tread backward
 		else if (y2 < -25) {
-			motor[right] = -y2;
+			motor[right] = y2;
 		}
 
 		//Motor unused
