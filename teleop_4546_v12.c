@@ -9,26 +9,34 @@
 #include "JoystickDriver.c"
 
 /* Change log
-16 9 2013 Jonathan - Program created
-17 9 2012 Jonathan - *Added seperate tasks for left and right drive control
+16 9 2013 Jonathan - *Program created
+17 9 2013 Jonathan - *Added seperate tasks for left and right drive control
 										 *Added basic drive controls - left stick = left motor & right stick = right motor
 										 *Note - controllers have inverted y values
+18 9 2013 Jonathan - *Drive control fixed
+										 *Basic scaling attempted
 */
+
+//Left tread drive control
 task driveL() {
 	while(true) {
 
 		getJoystickSettings(joystick);
 
-		if(joystick.joy1_y1 < -25) {
-			motor[left] = 100;
-		}
-		else {
-			motor[left] = 0;
+		//Define y1 variable
+		int y1 = -joystick.joy1_y1;
+
+		//Left tread forward
+		if(y1 > 25) {
+			motor[left] = y1;
 		}
 
-		if(joystick.joy1_y1 > 25) {
-			motor[left] = -100;
+		//Left tread backward
+		else if(y1 < -25) {
+			motor[left] = -y1;
 		}
+
+		//Motor unused
 		else {
 			motor[left] = 0;
 		}
@@ -38,31 +46,35 @@ task driveL() {
 
 
 
+//Right tread drive control
 task driveR() {
 	while(true) {
 
 		getJoystickSettings(joystick);
 
-		if(joystick.joy1_y2 < -25) {
-			motor[right] = 100;
-		}
-		else {
-			motor[right] = 0;
+		//Define y2 variable
+		int y2 = -joystick.joy1_y2;
+
+		//Right tread forward
+		if(y2 > 25) {
+			motor[right] = y2;
 		}
 
-		if(joystick.joy1_y2 > 25) {
-			motor[right] = -100;
-		}
-		else {
-			motor[left] = 0;
+		//Right tread backward
+		else if (y2 < -25) {
+			motor[right] = -y2;
 		}
 
+		//Motor unused
+		else {
+			motor[right]=0;
+		}
 		wait1Msec(5);
 	}
 }
 
 
-
+//MAIN TASK (YEAH)
 task main() {
 	waitForStart();
 	StartTask (driveL);
