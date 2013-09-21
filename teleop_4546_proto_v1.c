@@ -15,6 +15,8 @@
 										 *code compressed into single task
 										 *added a convyor belt task
 										 *commented out 85 limit until further notice
+										 *added second conveyor belt motor
+										 *commented out conveyor belt task
 */
 task drive() {
 	while(true) {
@@ -61,7 +63,7 @@ task drive() {
 }
 
 
-
+/*
 //Conveyor belt
 task convey() {
 	while(true) {
@@ -79,7 +81,7 @@ task convey() {
 		wait1Msec(5);
 	}
 }
-
+*/
 
 
 //Main task
@@ -87,6 +89,6 @@ task main()
 {
 	waitForStart();
 	StartTask(drive);
-	StartTask(convey);
+	//StartTask(convey);
 	while(true){}
 }
