@@ -29,7 +29,7 @@ task drive() {
 		short y2 = -joystick.joy1_y2;
 
 		//If statement determines motor movement
-		if((15 < (y1 || y2) < 85) || (-15 > (y1 || y2) > -85)) {
+		if((15 < (y1 || y2)) || (-15 > (y1 || y2))) {
 			motor[leftF] = y1;
 			motor[leftB] = y1;
 			motor[rightF] = y2;
