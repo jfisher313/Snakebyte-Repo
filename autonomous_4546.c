@@ -281,7 +281,7 @@ void irScan(float irVal){
 task autonomous(){
 
 
-	xMoveTo(1.219);
+	//xMoveTo(1.219);
 	// No resetVariables in irScan, it will use the data collected to move the rest of the distance
 	/*irScan(5);
 
