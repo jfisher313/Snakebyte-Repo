@@ -100,10 +100,16 @@ task convey() {
 			motor[conveyorR] = 50;
 			motor[conveyorL] = 50;
 		}
+		else if(joy2Btn(04) == 1) {
+			motor[conveyorR] = -50;
+			motor[conveyorL] = -50;
+		}
 		else{
 			motor[conveyorR] = 0;
 			motor[conveyorL] = 0;
 		}
+
+
 
 		//Wait to avoid latency issues
 		wait1Msec(5);
