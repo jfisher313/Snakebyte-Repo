@@ -31,6 +31,10 @@ Matt Mitchell
 Mikalai Shlapkou
 Lillie Hammer
 Linnea May
+Joshua Johnson
+
+MENTORS:
+Jesse Vera
 
 TEAMS IN COLLABORATION:
 FTC 6299 & FTC 4546
