@@ -96,21 +96,14 @@ task bucketServo() {
 		{
 		getJoystickSettings(joystick);
 
-		if(joy2Btn(02) == 1){
-			servo[bucketdropL] = 0;
-			servo[bucketdropR] = 255;        // To Dump the Blocks into Score Ring
-
+		if (joy2Btn(04) == 1 && ServoValue[bucketdropL] > 0) {
+			servo[bucketdropL] = ServoValue[bucketdropL] -1;
+		//	servo[bucketdropR] = ServoValue[bucketdropR] +1;
 		}
 
-		if(joy2Btn(03) == 1){
-			servo[bucketdropL] = 35;					// Values to keep the Bucket Level for blocks to go into
-			servo[bucketdropR] = 220;
-		}
-
-		if(joy2Btn(04) == 1){
-			servo[bucketdropL] = 120;					// Values to keep the Bucket upward to prevent blocks from falling out
-			servo[bucketdropR] = 135;
-
+		else if (joy2Btn(02) == 1 ){
+			servo[bucketdropL] = ServoValue[bucketdropL] +1;
+		//	servo[bucketdropR] = ServoValue[bucketdropR] -1;
 		}
 	}
 }
@@ -120,19 +113,6 @@ task bucketServo() {
 task flagLift() {
 	while(true){
 		getJoystickSettings(joystick);
-
-		if(joy2Btn(5) == 1) {
-			servo[flagL] = 100;
-			//servo[flagR] =
-		//	wait1Msec(500); //wait time
-			//wait1Msec(2000);
-		}
-		if (joy2Btn(6) == 1) {
-			servo[flagR] = 100;
-			//servo[flagR] =
-	//		wait1Msec(500); //wait time
-			//wait1Msec(2000);
-		}
 
 		if(joy1Btn(3) == 1){
 			motor[flagLifter] = 75;
@@ -144,7 +124,7 @@ task flagLift() {
 	}
 }
 
-task tumbleBlocks(){
+task blockTumbler(){
 	while(true){
 		getJoystickSettings(joystick);
 
@@ -161,10 +141,15 @@ task tumbleBlocks(){
 task main()
 {
 	waitForStart();
+
+	//servo[flagL] = 155;
+	//servo[flagR] = 100;
+
+
 	StartTask(drive);
 	StartTask(bucketServo);
 	StartTask(lift);
 	StartTask(flagLift);
-	StartTask(tumbleBlocks);
+	StartTask(blockTumbler);
 	while(true){}
 }
