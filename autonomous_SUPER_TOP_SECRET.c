@@ -100,11 +100,27 @@ void resetVariables(){
 
 	t = 0;
 	ClearTimer(T1);
+	ClearTimer(T2);
 
 	wait10Msec(100);
 	//theoretically the timer still runs while the wait is going on
 	ClearTimer(T1);
+	ClearTimer(T2);
 	reset = false;
+}
+
+void lift(short goal)
+{
+	resetVariables();
+	while(reset){}
+	short time;
+
+	while(goal < time)
+	{
+		time = time1[T2];
+		motor[conveyorL] = 20;
+		motor[conveyorR] = 20;
+	}
 }
 
 void xMoveTo(float dis){
@@ -221,11 +237,6 @@ void turn(short deg){
 			motor[rightB] = 0;
 		}
 	}
-}
-
-
-void lift(short sec){
-
 }
 
 void irScan(float irVal){
