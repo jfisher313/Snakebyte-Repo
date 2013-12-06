@@ -70,11 +70,11 @@ task lift() {
 		getJoystickSettings(joystick);
 
 		//If A is pressed, conveyor moves
-		if(joy2Btn(06) == 1) {
+		if(joy2Btn(05) == 1) {						// RB
 			motor[conveyorR] = 50;
 			motor[conveyorL] = 50;
 		}
-		else if(joy2Btn(05) == 1) {
+		else if(joy2Btn(06) == 1) {				// LB
 			motor[conveyorR] = -50;
 			motor[conveyorL] = -50;
 		}
@@ -91,19 +91,24 @@ task lift() {
 
 //chuteServo task
 task bucketServo() {
+		servo[bucketdropR] = 105;
 
 	while(true)
-		{
+	{
 		getJoystickSettings(joystick);
-
-		if (joy2Btn(04) == 1 && ServoValue[bucketdropL] > 0) {
-			servo[bucketdropL] = ServoValue[bucketdropL] -1;
-		//	servo[bucketdropR] = ServoValue[bucketdropR] +1;
+		if (joy2Btn(02) == 1 && ServoValue[bucketdropR] < 105) {		// Y
+		//	servo[bucketdropL] = ServoValue[bucketdropL] -1;
+			servo[bucketdropR] = ServoValue[bucketdropR] +10;
+		}
+		else if (joy2Btn(02) == 1 && joy2Btn(06) == 1)
+		{
+			//	servo[bucketdropL] = ServoValue[bucketdropL] -1;
+			servo[bucketdropR] = ServoValue[bucketdropR] +106;
 		}
 
-		else if (joy2Btn(02) == 1 ){
-			servo[bucketdropL] = ServoValue[bucketdropL] +1;
-		//	servo[bucketdropR] = ServoValue[bucketdropR] -1;
+		if (joy2Btn(01) == 1 ){
+		//	servo[bucketdropL] = ServoValue[bucketdropL] +1;				// A
+			servo[bucketdropR] = ServoValue[bucketdropR] -1;
 		}
 	}
 }
@@ -114,7 +119,7 @@ task flagLift() {
 	while(true){
 		getJoystickSettings(joystick);
 
-		if(joy1Btn(3) == 1){
+		if(joy1Btn(3) == 1){					//
 			motor[flagLifter] = 75;
 		}
 		else{
@@ -124,12 +129,30 @@ task flagLift() {
 	}
 }
 
+task flagServos()
+{
+	servo[flagR] = 127;
+	while(true){
+		getJoystickSettings(joystick);
+
+		if (joy1Btn(05) == 1) {		// Y
+		//	servo[flagL] = ServoValue[flagL] -1;
+			servo[flagR] = ServoValue[flagR] +1;
+		}
+
+		if (joy1Btn(06) == 1 ){
+		//	servo[flagL] = ServoValue[flagL] +1;				// A
+			servo[flagR] = ServoValue[flagR] -1;
+		}
+	}
+}
+
 task blockTumbler(){
 	while(true){
 		getJoystickSettings(joystick);
 
-		if(joy2Btn(01) == 1){
-			motor[tumbler] = 80;
+		if(joy2Btn(03) == 1){					// X
+			motor[tumbler] = 30;
 		}
 		else{
 			motor[tumbler] = 0;
@@ -147,6 +170,7 @@ task main()
 
 
 	StartTask(drive);
+	StartTask(flagServos);
 	StartTask(bucketServo);
 	StartTask(lift);
 	StartTask(flagLift);
