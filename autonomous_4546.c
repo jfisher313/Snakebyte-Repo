@@ -129,13 +129,13 @@ void resetVariables(){
 	reset = false;
 }
 
-void lift(short goal)
+void lift(long goal)
 {
 	resetVariables();
 	while(reset){}
-	short time;
+	long time;
 
-	while(goal < time)
+	while(time < goal)
 	{
 		time = time1[T2];
 		motor[conveyorL] = 20;
@@ -276,6 +276,7 @@ void irScan(float irVal){
 // Task that takes in all the methods and runs the robot
 task autonomous(){
 	//irScan(5);
+	//lift(1000);
 	xMoveTo(-3);
 }
 
