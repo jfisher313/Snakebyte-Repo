@@ -276,7 +276,7 @@ void irScan(float irVal){
 // Task that takes in all the methods and runs the robot
 task autonomous(){
 	//irScan(5);
-	xMoveTo(3);
+	xMoveTo(-3);
 }
 
 task main(){
