@@ -32,6 +32,9 @@ Mikalai Shlapkou
 Lillie Hammer
 Linnea May
 
+MENTORS:
+Jesse Vera
+
 TEAMS IN COLLABORATION:
 FTC 6299 & FTC 4546
 
@@ -276,7 +279,7 @@ task autonomous(){
 }
 
 task main(){
-	//waitForStart();
+	waitForStart();
 
 	StartTask(autonomous);
 
